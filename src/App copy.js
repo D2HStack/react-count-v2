@@ -1,3 +1,5 @@
+// App without using array in useState
+
 import React, { useState } from "react";
 
 import Counter from "./Counter";
@@ -5,29 +7,24 @@ import Counter from "./Counter";
 import "./style.css";
 
 function App() {
-  const [counters, setCounters] = useState([]);
+  const [nbCounter, setNbCounter] = useState(0);
 
   let tab = [];
-  tab = counters.map((counter, index) => {
-    return (
-      <Counter
-        index={index}
-        counters={counters}
-        setCounters={setCounters}
-      ></Counter>
-    );
-  });
+
+  for (let i = 0; i < nbCounter; i++) {
+    tab.push(<Counter></Counter>);
+  }
+
+  // console.log(nbCounter);
 
   return (
     <div className="App">
       <h1>React Counter v2</h1>
       <div>
-        {counters.length < 4 && (
+        {nbCounter < 3 && (
           <button
             onClick={() => {
-              const countersCopy = [...counters];
-              countersCopy.push(0);
-              setCounters(countersCopy);
+              setNbCounter(nbCounter + 1);
             }}
           >
             Add counter
